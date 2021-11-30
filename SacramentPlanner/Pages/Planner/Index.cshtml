@@ -1,0 +1,66 @@
+﻿@page
+@model SacramentPlanner.Pages.Planner.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SacramentPlan[0].Presiding)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SacramentPlan[0].Conducting)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SacramentPlan[0].Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SacramentPlan[0].CreationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SacramentPlan[0].OpeningPrayer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SacramentPlan[0].ClosingPrayer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.SacramentPlan) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Presiding)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Conducting)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpeningPrayer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClosingPrayer)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.SacramentPlannerId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.SacramentPlannerId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.SacramentPlannerId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
