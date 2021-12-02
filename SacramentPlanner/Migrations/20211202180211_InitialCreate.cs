@@ -20,13 +20,6 @@ namespace SacramentPlanner.Migrations
                     table.PrimaryKey("PK_Hymn", x => x.HymnId);
                 });
 
-
-
-
-
-
-
-
             migrationBuilder.CreateTable(
                 name: "SacramentPlanner",
                 columns: table => new

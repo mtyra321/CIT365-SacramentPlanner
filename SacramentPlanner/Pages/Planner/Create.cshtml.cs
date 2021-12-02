@@ -39,8 +39,8 @@ namespace SacramentPlanner.Pages.Planner
 
 
 
-           // _context.Speaker.Add(the speaker object);
-
+            // _context.Speaker.Add(the speaker object);
+            SacramentPlan.CreationDate = DateTime.Now;
 
 
             _context.SacramentPlanner.Add(SacramentPlan);
