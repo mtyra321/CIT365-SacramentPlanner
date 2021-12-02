@@ -34,6 +34,13 @@ namespace SacramentPlanner.Pages.Planner
             {
                 return Page();
             }
+            // create the speaker and hymn objects from the form inputs based on the names;
+            String openingHymnName = Request.Form["openingHymnName"];
+
+
+
+
+
 
             _context.SacramentPlanner.Add(SacramentPlan);
             await _context.SaveChangesAsync();

@@ -28,16 +28,32 @@
                 <input asp-for="SacramentPlan.Date" class="form-control" />
                 <span asp-validation-for="SacramentPlan.Date" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="SacramentPlan.CreationDate" class="control-label"></label>
-                <input asp-for="SacramentPlan.CreationDate" class="form-control" />
-                <span asp-validation-for="SacramentPlan.CreationDate" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="SacramentPlan.OpeningPrayer" class="control-label"></label>
                 <input asp-for="SacramentPlan.OpeningPrayer" class="form-control" />
                 <span asp-validation-for="SacramentPlan.OpeningPrayer" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label asp-for="SacramentPlan.OpeningHymn.Name" class="control-label" name="openingHymnName"></label>
+                <input asp-for="SacramentPlan.OpeningHymn.Name" class="form-control" />
+                <span asp-validation-for="SacramentPlan.OpeningHymn.Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SacramentPlan.SacramentHymn.Name" class="control-label" name="sacramentHymnName"></label>
+                <input asp-for="SacramentPlan.SacramentHymn.Name" class="form-control" />
+                <span asp-validation-for="SacramentPlan.SacramentHymn.Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SacramentPlan.SacramentHymn.Name" class="control-label" name="sacramentHymnName"></label>
+                <input asp-for="SacramentPlan.SacramentHymn.Name" class="form-control" />
+                <span asp-validation-for="SacramentPlan.SacramentHymn.Name" class="text-danger"></span>
+            </div>
+
+
             <div class="form-group">
                 <label asp-for="SacramentPlan.ClosingPrayer" class="control-label"></label>
                 <input asp-for="SacramentPlan.ClosingPrayer" class="form-control" />
