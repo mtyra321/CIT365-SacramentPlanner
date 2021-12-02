@@ -39,6 +39,7 @@ namespace SacramentPlanner.Pages.Planner
 
 
 
+           // _context.Speaker.Add(the speaker object);
 
 
 
