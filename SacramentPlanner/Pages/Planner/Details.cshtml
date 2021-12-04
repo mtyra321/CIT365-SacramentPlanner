@@ -30,19 +30,40 @@
             @Html.DisplayFor(model => model.SacramentPlan.Date)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SacramentPlan.CreationDate)
+            Created On:
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SacramentPlan.CreationDate)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SacramentPlan.OpeningPrayer)
+            Invocation:
         </dt>
+
+        @foreach (var speaker in Model.Speakers)
+        {
+    <dt class="col-sm-2">
+        Speaker: 
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(modelItem => speaker.Name)
+    </dd>
+        }
+
+
+
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SacramentPlan.OpeningPrayer)
         </dd>
+
+
+
+
+
+
+
+
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SacramentPlan.ClosingPrayer)
+            Benediction:
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SacramentPlan.ClosingPrayer)

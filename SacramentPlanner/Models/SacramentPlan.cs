@@ -21,7 +21,7 @@ namespace SacramentPlanner.Models
         public Hymn SacramentHymn { get; set; }
 
         public Hymn? IntermediateHymn { get; set; }
-
+         
 
         public Hymn ClosingHymn { get; set; }
 

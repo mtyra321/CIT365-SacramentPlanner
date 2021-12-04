@@ -10,8 +10,8 @@ using SacramentPlanner.Data;
 namespace SacramentPlanner.Migrations
 {
     [DbContext(typeof(SacramentPlannerContext))]
-    [Migration("20211202180211_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20211202212048_addSpeaker")]
+    partial class addSpeaker
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,6 +86,32 @@ namespace SacramentPlanner.Migrations
                     b.ToTable("SacramentPlanner");
                 });
 
+            modelBuilder.Entity("SacramentPlanner.Models.Speaker", b =>
+                {
+                    b.Property<int>("SpeakerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SacramentPlannerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SacramentPlannerId1")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Topic")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SpeakerId");
+
+                    b.HasIndex("SacramentPlannerId1");
+
+                    b.ToTable("Speaker");
+                });
+
             modelBuilder.Entity("SacramentPlanner.Models.SacramentPlan", b =>
                 {
                     b.HasOne("SacramentPlanner.Models.Hymn", "ClosingHymn")
@@ -111,6 +137,15 @@ namespace SacramentPlanner.Migrations
                     b.Navigation("OpeningHymn");
 
                     b.Navigation("SacramentHymn");
+                });
+
+            modelBuilder.Entity("SacramentPlanner.Models.Speaker", b =>
+                {
+                    b.HasOne("SacramentPlanner.Models.SacramentPlan", "SacramentPlan")
+                        .WithMany()
+                        .HasForeignKey("SacramentPlannerId1");
+
+                    b.Navigation("SacramentPlan");
                 });
 #pragma warning restore 612, 618
         }

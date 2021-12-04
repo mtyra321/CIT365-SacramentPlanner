@@ -17,6 +17,7 @@ namespace SacramentPlanner.Pages.Planner
         public CreateModel(SacramentPlanner.Data.SacramentPlannerContext context)
         {
             _context = context;
+            Speakers = new List<Speaker>();
         }
 
         public IActionResult OnGet()
@@ -26,6 +27,7 @@ namespace SacramentPlanner.Pages.Planner
 
         [BindProperty]
         public SacramentPlan SacramentPlan { get; set; }
+        public List<Speaker> Speakers { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -36,14 +38,19 @@ namespace SacramentPlanner.Pages.Planner
             }
             // create the speaker and hymn objects from the form inputs based on the names;
             String openingHymnName = Request.Form["openingHymnName"];
-
-
-
-            // _context.Speaker.Add(the speaker object);
+            String speakerName = Request.Form["Speaker0"];
+            Speaker speaker = new Speaker();
             SacramentPlan.CreationDate = DateTime.Now;
 
 
             _context.SacramentPlanner.Add(SacramentPlan);
+            await _context.SaveChangesAsync();
+
+            speaker.Name = "joe";
+            speaker.SacramentPlannerId = SacramentPlan.SacramentPlannerId;
+            Speakers.Add(speaker);
+
+            _context.Speaker.Add(Speakers[0]);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

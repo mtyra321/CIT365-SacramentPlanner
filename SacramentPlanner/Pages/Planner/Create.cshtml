@@ -4,27 +4,35 @@
 @{
     ViewData["Title"] = "Create";
 }
-<script >function addSpeaker() {
+<script >
+
+    var x = 0
+    function addSpeaker() {
     console.log("something");
     var div = document.createElement("div");
+    div.classList.add("singleSpeaker");
     var label = document.createElement("label");
+    label.tagName="speakerName";
     var input = document.createElement("input");
     var removeBtn = document.createElement("button");
+    label.id = "speaker" + x
+    removeBtn.type = "button";
     removeBtn.textContent = "X";
     label.textContent = "Enter a speaker: ";
     div.appendChild(label);
     div.appendChild(document.createElement("br"));
     div.appendChild(input);
     div.appendChild(removeBtn);
-    removeBtn.addEventListener('touchend', removeSpeaker())
+    removeBtn.addEventListener('click', function (e) {
+
+        document.getElementById("speakerDiv").removeChild(e.path[1]);
+
+    });
 
     document.getElementById("speakerDiv").appendChild(div);
 
     }
 
-    function removeSpeaker(Element ) {
-
-    }
 
     </script>
 <h1>Create</h1>
@@ -58,25 +66,25 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="SacramentPlan.OpeningHymn.Name" class="control-label" name="openingHymnName">Opening Hymn</label>
-                <input asp-for="SacramentPlan.OpeningHymn.Name" class="form-control" />
+                <label asp-for="SacramentPlan.OpeningHymn.Name" class="control-label" >Opening Hymn</label>
+                <input asp-for="SacramentPlan.OpeningHymn.Name" class="form-control" name="openingHymnName" />
                 <span asp-validation-for="SacramentPlan.OpeningHymn.Name" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="SacramentPlan.SacramentHymn.Name" class="control-label" name="sacramentHymnName">Sacrament Hymn</label>
-                <input asp-for="SacramentPlan.SacramentHymn.Name" class="form-control" />
+                <label asp-for="SacramentPlan.SacramentHymn.Name" class="control-label" >Sacrament Hymn</label>
+                <input asp-for="SacramentPlan.SacramentHymn.Name" class="form-control"  name="sacramentHymnName" />
                 <span asp-validation-for="SacramentPlan.SacramentHymn.Name" class="text-danger"></span>
             </div>
 
 
             <button type="button" id="addSpeakerBtn" onclick="addSpeaker()">Add Speaker</button>
-            <div class="form-group" id="speakerDiv">
+            <div  class="form-group" id="speakerDiv">
                
             </div>
             <div class="form-group">
-                <label asp-for="SacramentPlan.ClosingHymn.Name" class="control-label" name="closingHymnName">Closing Hymn</label>
-                <input asp-for="SacramentPlan.ClosingHymn.Name" class="form-control" />
+                <label asp-for="SacramentPlan.ClosingHymn.Name" class="control-label" >Closing Hymn</label>
+                <input asp-for="SacramentPlan.ClosingHymn.Name" class="form-control" name="closingHymnName" />
                 <span asp-validation-for="SacramentPlan.ClosingHymn.Name" class="text-danger"></span>
             </div>
 
