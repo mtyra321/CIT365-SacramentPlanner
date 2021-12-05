@@ -38,19 +38,42 @@ namespace SacramentPlanner.Pages.Planner
             }
             // create the speaker and hymn objects from the form inputs based on the names;
             String openingHymnName = Request.Form["openingHymnName"];
-            String speakerName = Request.Form["Speaker0"];
-            Speaker speaker = new Speaker();
+            String sacramentHymnName = Request.Form["sacramentHymnName"];
+            String intermediateHymnName = Request.Form["intermediateHymnName"];
+            String closingHymnName = Request.Form["closingHymnName"];
+            Hymn openingHymn = new Hymn(openingHymnName);
+            Hymn intermediateHymn;          
+            Hymn sacramentHymn = new Hymn(sacramentHymnName);
+            if (intermediateHymnName != "")
+            {
+                 intermediateHymn = new Hymn(intermediateHymnName);
+                _context.Hymn.Add(intermediateHymn);
+
+            }
+            Hymn closingHymn = new Hymn(closingHymnName);
+            _context.Hymn.Add(openingHymn);
+            _context.Hymn.Add(sacramentHymn);
+
+            _context.Hymn.Add(closingHymn);
+           
             SacramentPlan.CreationDate = DateTime.Now;
 
 
             _context.SacramentPlanner.Add(SacramentPlan);
             await _context.SaveChangesAsync();
-
-            speaker.Name = "joe";
-            speaker.SacramentPlannerId = SacramentPlan.SacramentPlannerId;
-            Speakers.Add(speaker);
-
-            _context.Speaker.Add(Speakers[0]);
+            String speakerName = "";
+            Speaker speaker= new Speaker(); ;
+            int x = 0;
+            while (speakerName != null) 
+            {
+                speakerName = Request.Form["speakerName"+x];
+                speaker = new Speaker();
+                speaker.Name = speakerName;
+                speaker.SacramentPlannerId = SacramentPlan.SacramentPlannerId;
+                _context.Speaker.Add(speaker);
+                x++;
+            }
+           
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

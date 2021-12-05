@@ -13,6 +13,7 @@ namespace SacramentPlanner.Data
             : base(options)
         {
         }
+        public DbSet<SacramentPlanner.Models.Hymn> Hymn { get; set; }
 
         public DbSet<SacramentPlanner.Models.SacramentPlan> SacramentPlanner { get; set; }
         public DbSet<SacramentPlanner.Models.Speaker> Speaker { get; set; }
