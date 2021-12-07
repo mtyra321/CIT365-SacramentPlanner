@@ -22,6 +22,8 @@ namespace SacramentPlanner.Pages.Planner
 
         [BindProperty]
         public SacramentPlan SacramentPlan { get; set; }
+        public IQueryable<Speaker> Speakers { get; set; }
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -36,6 +38,18 @@ namespace SacramentPlanner.Pages.Planner
             {
                 return NotFound();
             }
+
+
+            Speakers = from s in _context.Speaker
+                       select s;
+            Speakers = Speakers.Where(x => x.SacramentPlannerId == SacramentPlan.SacramentPlannerId).OrderByDescending(x => x.SpeakerId);
+
+
+
+
+
+
+
             return Page();
         }
 

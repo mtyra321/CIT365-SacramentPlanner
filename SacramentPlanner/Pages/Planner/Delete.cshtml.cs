@@ -49,6 +49,12 @@ namespace SacramentPlanner.Pages.Planner
 
             if (SacramentPlan != null)
             {
+                
+                //Speakers = from s in _context.Speaker
+                //           select s;
+                //Speakers = Speakers.Where(x => x.SacramentPlannerId == SacramentPlan.SacramentPlannerId).OrderByDescending(x => x.SpeakerId);
+                //then loop through speakers and remove each one from context.
+               
                 _context.SacramentPlanner.Remove(SacramentPlan);
                 await _context.SaveChangesAsync();
             }
