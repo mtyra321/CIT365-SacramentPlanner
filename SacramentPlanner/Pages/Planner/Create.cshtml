@@ -62,19 +62,19 @@
 
             <div class="form-group">
                 <label asp-for="SacramentPlan.OpeningPrayer" class="control-label"></label>
-                @Html.DropDownList("HymnsList", (IEnumerable<SelectListItem>)ViewBag.HymnsList)
+                <input asp-for="SacramentPlan.OpeningPrayer" class="control-label"></input>
                 <span asp-validation-for="SacramentPlan.OpeningPrayer" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="SacramentPlan.OpeningHymn.Name" class="control-label">Opening Hymn</label>
-                <input asp-for="SacramentPlan.OpeningHymn.Name" class="form-control" name="openingHymnName" />
+                @Html.DropDownList("HymnsList", (IEnumerable<SelectListItem>)ViewBag.HymnsList)
                 <span asp-validation-for="SacramentPlan.OpeningHymn.Name" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="SacramentPlan.SacramentHymn.Name" class="control-label">Sacrament Hymn</label>
-                <input asp-for="SacramentPlan.SacramentHymn.Name" class="form-control" name="sacramentHymnName" />
+                @Html.DropDownList("HymnsList", (IEnumerable<SelectListItem>)ViewBag.HymnsList)
                 <span asp-validation-for="SacramentPlan.SacramentHymn.Name" class="text-danger"></span>
             </div>
 
@@ -85,8 +85,8 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="SacramentPlan.IntermediateHymn.Name" class="control-label">Closing Hymn</label>
-                <input asp-for="SacramentPlan.IntermediateHymn.Name" class="form-control" name="intermediateHymnName" />
+                <label asp-for="SacramentPlan.IntermediateHymn.Name" class="control-label">Intermediate Hymn</label>
+                @Html.DropDownList("HymnsList", (IEnumerable<SelectListItem>)ViewBag.HymnsList)
                 <span asp-validation-for="SacramentPlan.IntermediateHymn.Name" class="text-danger"></span>
             </div>
 
@@ -94,7 +94,7 @@
 
             <div class="form-group">
                 <label asp-for="SacramentPlan.ClosingHymn.Name" class="control-label">Closing Hymn</label>
-                <input asp-for="SacramentPlan.ClosingHymn.Name" class="form-control" name="closingHymnName" />
+                @Html.DropDownList("HymnsList", (IEnumerable<SelectListItem>)ViewBag.HymnsList)
                 <span asp-validation-for="SacramentPlan.ClosingHymn.Name" class="text-danger"></span>
             </div>
 
