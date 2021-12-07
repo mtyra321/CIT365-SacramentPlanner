@@ -38,28 +38,25 @@
         <dt class="col-sm-2">
             Invocation:
         </dt>
-
-        @foreach (var speaker in Model.Speakers)
-        {
-    <dt class="col-sm-2">
-        Speaker: 
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(modelItem => speaker.Name)
-    </dd>
-        }
-
-
-
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SacramentPlan.OpeningPrayer)
         </dd>
+        @foreach (var speaker in Model.Speakers)
+        {
+            <dt class="col-sm-2">
+                Speaker:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => speaker.Name)
+            </dd>
 
-
-
-
-
-
+            <dt class="col-sm-2">
+                Topic:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => speaker.Topic)
+            </dd>
+        }
 
 
         <dt class="col-sm-2">

@@ -121,9 +121,13 @@ namespace SacramentPlanner.Pages.Planner
             int x = 0;
             while (speakerName != null) 
             {
-                speakerName = Request.Form["speakerName"+x];
+                speakerName =   Request.Form["speakerName"+x];
+                if (speakerName == null)
+                    break;
+
                 speaker = new Speaker();
                 speaker.Name = speakerName;
+                speaker.Topic = Request.Form["speakerTopic" + x];
                 speaker.SacramentPlannerId = SacramentPlan.SacramentPlannerId;
                 _context.Speaker.Add(speaker);
                 x++;
