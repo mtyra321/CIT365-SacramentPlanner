@@ -26,7 +26,8 @@ namespace SacramentPlanner.Pages.Planner
         {
             String line;
             String data = "{";
-            List<string> Hymns = new List<string>();
+            List<Hymn> HymnList = new List<Hymn>();
+            List<SelectListItem> Hymns = new List<SelectListItem>();
             try
             {
                 //Pass the file path and file name to the StreamReader constructor
@@ -51,10 +52,12 @@ namespace SacramentPlanner.Pages.Planner
 
                 for (int i = 0; i < 341; i++)
                 {
-                    //new ListItem(myHymn.Hymn((string)details[i.ToString()]["name"]), myHymn.HymnId.ToString()(i)
+                    
                     try
                     {
-                        Hymns.Add((string)details[i.ToString()]["name"]);
+                        Hymn Hymn = new Hymn((string)details[i.ToString()]["name"]);
+                        Hymn.HymnId = i;
+                        HymnList.Add(Hymn);
                     }
                     catch (Exception e)
                     {
@@ -70,6 +73,8 @@ namespace SacramentPlanner.Pages.Planner
             {
                 Console.WriteLine("Executing finally block.");
             }
+            SelectList HymnSelectList = new SelectList(HymnList, "HymnId", "Name");
+            ViewData["HymnsList"] = HymnSelectList;
 
             return Page();
         }

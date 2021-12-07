@@ -3,6 +3,8 @@
 
 @{
     ViewData["Title"] = "Create";
+    //var Hymns = ViewData["HymnsList"];
+    
 }
 <script >
 
@@ -60,7 +62,7 @@
 
             <div class="form-group">
                 <label asp-for="SacramentPlan.OpeningPrayer" class="control-label"></label>
-                <input asp-for="SacramentPlan.OpeningPrayer" class="form-control" />
+                @Html.DropDownList("HymnsList", (IEnumerable<SelectListItem>)ViewBag.HymnsList)
                 <span asp-validation-for="SacramentPlan.OpeningPrayer" class="text-danger"></span>
             </div>
 
