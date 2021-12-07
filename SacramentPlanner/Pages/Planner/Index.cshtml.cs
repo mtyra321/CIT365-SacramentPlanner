@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SacramentPlanner.Data;
 using SacramentPlanner.Models;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace SacramentPlanner.Pages.Planner
 {
@@ -24,6 +26,7 @@ namespace SacramentPlanner.Pages.Planner
         public async Task OnGetAsync()
         {
             SacramentPlan = await _context.SacramentPlanner.ToListAsync();
+            
         }
     }
 }

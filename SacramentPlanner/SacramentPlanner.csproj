@@ -5,7 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="JSON\Hymns.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="JSON\Hymns.json" />
   </ItemGroup>
 
   <ItemGroup>
