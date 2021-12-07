@@ -35,9 +35,9 @@ namespace SacramentPlanner.Pages.Planner
             {
                 return NotFound();
             }
-             Speakers = from d in _context.Speaker
-                        select d;
-            Speakers = Speakers.Where(x => x.SacramentPlannerId == SacramentPlan.SacramentPlannerId);
+             Speakers = from s in _context.Speaker
+                        select s;
+            Speakers = Speakers.Where(x => x.SacramentPlannerId == SacramentPlan.SacramentPlannerId).OrderByDescending(x => x.SpeakerId );
             
 
 
