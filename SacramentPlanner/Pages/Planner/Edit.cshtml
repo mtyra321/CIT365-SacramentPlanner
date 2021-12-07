@@ -5,6 +5,46 @@
     ViewData["Title"] = "Edit";
 }
 
+<script>
+
+    var x = 0;
+    function addSpeaker() {
+        console.log("something");
+        var div = document.createElement("div");
+        div.classList.add("singleSpeaker");
+        var label = document.createElement("label");
+        var topicLabel = document.createElement("label");
+
+        var input = document.createElement("input");
+        var topic = document.createElement("input");
+
+        var removeBtn = document.createElement("button");
+        input.name = "speakerName" + x;
+        topic.name = "speakerTopic" + x;
+
+        removeBtn.type = "button";
+        removeBtn.textContent = "X";
+        label.textContent = "Enter a speaker: ";
+        topicLabel.textContent = "Enter the speaker's topic: ";
+
+        div.appendChild(label);
+        div.appendChild(document.createElement("br"));
+        div.appendChild(input);
+        div.appendChild(document.createElement("br"));
+        div.appendChild(topicLabel);
+        div.appendChild(topic);
+
+        div.appendChild(removeBtn);
+        x++;
+        removeBtn.addEventListener('click', function (e) {
+            document.getElementById("speakerDiv").removeChild(e.path[1]);
+        });
+        document.getElementById("speakerDiv").appendChild(div);
+    }
+ 
+</script>
+
+
 <h1>Edit</h1>
 
 <h4>SacramentPlanner</h4>
@@ -62,7 +102,7 @@
 
                 <div class="form-group">
                     <label asp-for="@speaker" class="control-label">Speaker: </label>
-                    <input class="form-control"  />
+                    <input class="form-control" />
                 </div>
                 //value="@Html.DisplayFor(modelItem => speaker.Name)"
                 <div class="form-group">
@@ -71,21 +111,12 @@
                 </div>
                 //i++;
 
-
-                @*<dt class="col-sm-2">
-                Speaker:
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(modelItem => speaker.Name)
-            </dd>
-
-            <dt class="col-sm-2">
-                Topic:
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(modelItem => speaker.Topic)
-            </dd>*@
             }
+
+            <button type="button" id="addSpeakerBtn" onclick="addSpeaker()">Add Speaker</button>
+            <div class="form-group" id="speakerDiv">
+
+            </div>
 
 
 

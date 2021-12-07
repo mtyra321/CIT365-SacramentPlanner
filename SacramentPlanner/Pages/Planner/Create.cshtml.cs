@@ -75,10 +75,11 @@ namespace SacramentPlanner.Pages.Planner
                 speaker.Topic = Request.Form["speakerTopic" + x];
                 speaker.SacramentPlannerId = SacramentPlan.SacramentPlannerId;
                 _context.Speaker.Add(speaker);
+                await _context.SaveChangesAsync();
                 x++;
             }
            
-            await _context.SaveChangesAsync();
+            //await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

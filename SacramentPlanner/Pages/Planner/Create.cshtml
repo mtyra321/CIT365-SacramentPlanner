@@ -20,30 +20,27 @@
     var removeBtn = document.createElement("button");
     input.name = "speakerName" + x;
     topic.name = "speakerTopic" + x;
-
-    x++;
+    
     removeBtn.type = "button";
     removeBtn.textContent = "X";
-        label.textContent = "Enter a speaker: ";
-        topicLabel.textContent = "Enter the speaker's topic: ";
+    label.textContent = "Enter a speaker: ";
+    topicLabel.textContent = "Enter the speaker's topic: ";
 
     div.appendChild(label);
     div.appendChild(document.createElement("br"));
-        div.appendChild(input);
-        div.appendChild(document.createElement("br"));
-        div.appendChild(topicLabel);
-        div.appendChild(topic);
+    div.appendChild(input);
+    div.appendChild(document.createElement("br"));
+    div.appendChild(topicLabel);
+    div.appendChild(topic);
 
     div.appendChild(removeBtn);
-
-
+    x++;
     removeBtn.addEventListener('click', function (e) {
         document.getElementById("speakerDiv").removeChild(e.path[1]);
     });
         document.getElementById("speakerDiv").appendChild(div);
     }
-
-
+   
     </script>
 <h1>Create</h1>
 

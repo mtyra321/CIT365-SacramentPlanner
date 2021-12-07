@@ -42,8 +42,11 @@ namespace SacramentPlanner.Pages.Planner
 
             Speakers = from s in _context.Speaker
                        select s;
-            Speakers = Speakers.Where(x => x.SacramentPlannerId == SacramentPlan.SacramentPlannerId).OrderByDescending(x => x.SpeakerId);
+            Speakers = Speakers.Where(x => x.SacramentPlannerId == SacramentPlan.SacramentPlannerId).OrderBy(x => x.SpeakerId);
 
+
+
+         
 
 
 
@@ -79,6 +82,28 @@ namespace SacramentPlanner.Pages.Planner
                     throw;
                 }
             }
+
+
+            String speakerName = "";
+            Speaker speaker = new Speaker(); ;
+            int x = 0;
+            while (speakerName != null)
+            {
+                speakerName = Request.Form["speakerName" + x];
+                if (speakerName == null)
+                    break;
+
+                speaker = new Speaker();
+                speaker.Name = speakerName;
+                speaker.Topic = Request.Form["speakerTopic" + x];
+                speaker.SacramentPlannerId = SacramentPlan.SacramentPlannerId;
+                _context.Speaker.Add(speaker);
+                x++;
+            }
+
+            await _context.SaveChangesAsync();
+
+
 
             return RedirectToPage("./Index");
         }

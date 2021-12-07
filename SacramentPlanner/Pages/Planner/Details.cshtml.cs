@@ -37,7 +37,7 @@ namespace SacramentPlanner.Pages.Planner
             }
              Speakers = from s in _context.Speaker
                         select s;
-            Speakers = Speakers.Where(x => x.SacramentPlannerId == SacramentPlan.SacramentPlannerId).OrderByDescending(x => x.SpeakerId );
+            Speakers = Speakers.Where(x => x.SacramentPlannerId == SacramentPlan.SacramentPlannerId).OrderBy(x => x.SpeakerId );
             
 
 
