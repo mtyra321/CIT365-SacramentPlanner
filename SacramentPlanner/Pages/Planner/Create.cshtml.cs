@@ -55,9 +55,9 @@ namespace SacramentPlanner.Pages.Planner
                     
                     try
                     {
-                        Hymn Hymn = new Hymn((string)details[i.ToString()]["name"]);
-                        Hymn.HymnId = i;
-                        HymnList.Add(Hymn);
+                        //Hymn Hymn = new Hymn((string)details[i.ToString()]["name"]);
+                        //Hymn.HymnId = i;
+                        //HymnList.Add(Hymn);
                     }
                     catch (Exception e)
                     {
@@ -96,16 +96,16 @@ namespace SacramentPlanner.Pages.Planner
             String sacramentHymnName = Request.Form["sacramentHymnName"];
             String intermediateHymnName = Request.Form["intermediateHymnName"];
             String closingHymnName = Request.Form["closingHymnName"];
-            Hymn openingHymn = new Hymn(openingHymnName);
+            Hymn openingHymn = new Hymn(openingHymnName,0);
             Hymn intermediateHymn;          
-            Hymn sacramentHymn = new Hymn(sacramentHymnName);
+            Hymn sacramentHymn = new Hymn(sacramentHymnName,1);
             if (intermediateHymnName != "")
             {
-                 intermediateHymn = new Hymn(intermediateHymnName);
+                 intermediateHymn = new Hymn(intermediateHymnName,2);
                 _context.Hymn.Add(intermediateHymn);
 
             }
-            Hymn closingHymn = new Hymn(closingHymnName);
+            Hymn closingHymn = new Hymn(closingHymnName,3);
             _context.Hymn.Add(openingHymn);
             _context.Hymn.Add(sacramentHymn);
 

@@ -14,9 +14,10 @@ namespace SacramentPlanner.Models
 
         public String Name { get; set; }
 
-        public Hymn( string name)
+        public Hymn( string name, int id)
         {
             Name = name;
+            HymnId = id;
         }
     }
 }
