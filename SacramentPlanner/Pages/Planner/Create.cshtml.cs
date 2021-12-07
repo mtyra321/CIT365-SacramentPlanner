@@ -96,16 +96,16 @@ namespace SacramentPlanner.Pages.Planner
             String sacramentHymnName = Request.Form["sacramentHymnName"];
             String intermediateHymnName = Request.Form["intermediateHymnName"];
             String closingHymnName = Request.Form["closingHymnName"];
-            Hymn openingHymn = new Hymn(openingHymnName,0);
+            Hymn openingHymn = new Hymn(openingHymnName);
             Hymn intermediateHymn;          
-            Hymn sacramentHymn = new Hymn(sacramentHymnName,1);
+            Hymn sacramentHymn = new Hymn(sacramentHymnName);
             if (intermediateHymnName != "")
             {
-                 intermediateHymn = new Hymn(intermediateHymnName,2);
+                 intermediateHymn = new Hymn(intermediateHymnName);
                 _context.Hymn.Add(intermediateHymn);
 
             }
-            Hymn closingHymn = new Hymn(closingHymnName,3);
+            Hymn closingHymn = new Hymn(closingHymnName);
             _context.Hymn.Add(openingHymn);
             _context.Hymn.Add(sacramentHymn);
 
