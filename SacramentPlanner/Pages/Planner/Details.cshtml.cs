@@ -20,6 +20,7 @@ namespace SacramentPlanner.Pages.Planner
         }
 
         public SacramentPlan SacramentPlan { get; set; }
+        public IQueryable<Speaker> Speakers { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -34,6 +35,15 @@ namespace SacramentPlanner.Pages.Planner
             {
                 return NotFound();
             }
+             Speakers = from d in _context.Speaker
+                        select d;
+            Speakers = Speakers.Where(x => x.SacramentPlannerId == SacramentPlan.SacramentPlannerId);
+            
+
+
+
+
+
             return Page();
         }
     }

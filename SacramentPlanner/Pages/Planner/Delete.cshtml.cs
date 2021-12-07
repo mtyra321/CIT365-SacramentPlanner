@@ -44,7 +44,7 @@ namespace SacramentPlanner.Pages.Planner
             {
                 return NotFound();
             }
-
+             
             SacramentPlan = await _context.SacramentPlanner.FindAsync(id);
 
             if (SacramentPlan != null)
