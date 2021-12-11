@@ -46,6 +46,12 @@ namespace SacramentPlanner.Pages.Planner
             //Speakers = from s in _context.Speaker
             //           select s;
             //Speakers = Speakers.Where(x => x.SacramentPlannerId == SacramentPlan.SacramentPlannerId).OrderBy(x => x.SpeakerId);
+            var HymnList = _context.Hymn.Select(h => new { HymnId = h.HymnId, HymnValue = $"{h.HymnId} - {h.Name}" }).ToList();
+            var NoHymn = new { HymnId = 0, HymnValue = "No Hymn Selected" };
+            HymnList.Insert(0, NoHymn);
+
+            SelectList HymnSelectList = new SelectList(HymnList, "HymnId", "HymnValue");
+            ViewData["HymnsList"] = HymnSelectList;
             return Page();
         }
 
@@ -57,7 +63,26 @@ namespace SacramentPlanner.Pages.Planner
             {
                 return Page();
             }
-         //   _context.Attach(SacramentPlan.Speakers).State = EntityState.Modified;
+            //   _context.Attach(SacramentPlan.Speakers).State = EntityState.Modified;
+
+            var openingHymnId = Request.Form["HymnsListOpening"];
+            var sacramentHymnId = Request.Form["HymnsListSacrament"];
+            var intermediateHymnId = Request.Form["HymnsListIntermediate"];
+            var closingHymnId = Request.Form["HymnsListClosing"];
+
+
+            var HymnList = from h in _context.Hymn
+                           select h;
+
+            var OpeningHymn = HymnList.FirstOrDefault(x => x.HymnId == Int32.Parse(openingHymnId));
+            var SacramentHymn = HymnList.FirstOrDefault(x => x.HymnId == Int32.Parse(sacramentHymnId));
+            var IntermediateHymn = HymnList.FirstOrDefault(x => x.HymnId == Int32.Parse(intermediateHymnId));
+            var ClosingHymn = HymnList.FirstOrDefault(x => x.HymnId == Int32.Parse(closingHymnId));
+
+            SacramentPlan.OpeningHymn = OpeningHymn;
+            SacramentPlan.SacramentHymn = SacramentHymn;
+            SacramentPlan.IntermediateHymn = IntermediateHymn;
+            SacramentPlan.ClosingHymn = ClosingHymn;
 
             _context.Attach(SacramentPlan).State = EntityState.Modified;
             //foreach (Speaker oneSpeaker in SacramentPlan.Speakers)

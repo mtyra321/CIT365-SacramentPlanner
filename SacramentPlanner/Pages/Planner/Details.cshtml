@@ -2,13 +2,29 @@
 @model SacramentPlanner.Pages.Planner.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Rexburg Student Ward";
 }
 
-<h1>Details</h1>
+<style>
 
-<div>
-    <h4>SacramentPlanner</h4>
+    .center{
+        width: 60%;
+    }
+
+    .col-sm-2 {
+        text-align: left;
+    }
+
+    .col-sm-10 {
+        text-align: right;
+    }
+
+</style>
+
+
+<div class="center">
+    <h4 style="text-align: center">Rexburg Student Ward</h4>
+    <h6 style=" text-align: center">@Html.DisplayFor(model => model.SacramentPlan.Date.Month) - @Html.DisplayFor(model => model.SacramentPlan.Date.Day) - @Html.DisplayFor(model => model.SacramentPlan.Date.Year)</h6>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -23,85 +39,124 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SacramentPlan.Conducting)
         </dd>
-        <dt class="col-sm-2">
+    </dl>
+    <hr />
+    @*<dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.SacramentPlan.Date)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SacramentPlan.Date)
-        </dd>
-        <dt class="col-sm-2">
+        </dd>*@
+    @*<dt class="col-sm-2">
             Created On:
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SacramentPlan.CreationDate)
-        </dd>
-        @if (Model.SacramentPlan.OpeningHymn != null)
-        {
-            <dt class="col-sm-2">
-                Opening Hymn:
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.SacramentPlan.OpeningHymn.HymnId) - @Html.DisplayFor(model => model.SacramentPlan.OpeningHymn.Name)
-            </dd>
-        }
+        </dd>*@
+<dl class="row">
+    @if (Model.SacramentPlan.OpeningHymn != null)
+    {
         <dt class="col-sm-2">
-            Invocation:
+            Opening Hymn
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SacramentPlan.OpeningPrayer)
+            @Html.DisplayFor(model => model.SacramentPlan.OpeningHymn.HymnId) - @Html.DisplayFor(model => model.SacramentPlan.OpeningHymn.Name)
         </dd>
+    }
+    <dt class="col-sm-2">
+    </dt>
+    <dd class="col-sm-10">
+    </dd>
+    <dt class="col-sm-2">
+        Invocation
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.SacramentPlan.OpeningPrayer)
+    </dd>
+    <dt class="col-sm-2">
+    </dt>
+    <dd class="col-sm-10">
+    </dd>
+    @if (Model.SacramentPlan.SacramentHymn != null)
+    {
+        <dt class="col-sm-2">
+            Sacramental Hymn
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SacramentPlan.SacramentHymn.HymnId) - @Html.DisplayFor(model => model.SacramentPlan.SacramentHymn.Name)
+        </dd>
+    }
+</dl>
+    <hr />
+    <dl class=" row">
+
         @foreach (var speaker in Model.Speakers)
         {
+            @if (Model.SacramentPlan.IntermediateHymn != null && speaker == Model.Speakers.LastOrDefault(x => x.SpeakerId == x.SpeakerId))
+            {
+                <dt class="col-sm-2">
+                    Intermediate Hymn
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.SacramentPlan.IntermediateHymn.HymnId) - @Html.DisplayFor(model => model.SacramentPlan.IntermediateHymn.Name)
+                </dd>
+                <dd class="col-sm-10">
+                </dd>
+                <dt class="col-sm-2">
+                </dt>
+                <dd class="col-sm-10">
+                </dd>
+                <dt class="col-sm-2">
+                </dt>
+
+            }
             <dt class="col-sm-2">
-                Speaker:
+                Speaker
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(modelItem => speaker.Name)
             </dd>
 
             <dt class="col-sm-2">
-                Topic:
+                Topic
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(modelItem => speaker.Topic)
             </dd>
-        }
-        @if (Model.SacramentPlan.SacramentHymn != null)
-        {
             <dt class="col-sm-2">
-                Sacramental Hymn:
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.SacramentPlan.SacramentHymn.HymnId) - @Html.DisplayFor(model => model.SacramentPlan.SacramentHymn.Name)
             </dd>
-        }
-        @if (Model.SacramentPlan.IntermediateHymn != null)
-        {
             <dt class="col-sm-2">
-                Intermediate Hymn:
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.SacramentPlan.IntermediateHymn.HymnId) - @Html.DisplayFor(model => model.SacramentPlan.IntermediateHymn.Name)
             </dd>
-
         }
+        </dl>
+    <hr />
+    <dl class=" row">
         @if (Model.SacramentPlan.ClosingHymn != null)
         {
             <dt class="col-sm-2">
-                Closing Hymn:
+                Closing Hymn
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.SacramentPlan.ClosingHymn.HymnId) - @Html.DisplayFor(model => model.SacramentPlan.ClosingHymn.Name)
             </dd>
+            <dt class="col-sm-2">
+            </dt>
+            <dd class="col-sm-10">
+            </dd>
         }
 
         <dt class="col-sm-2">
-            Benediction:
+            Benediction
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SacramentPlan.ClosingPrayer)
         </dd>
     </dl>
+    <hr />
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.SacramentPlan.SacramentPlannerId">Edit</a> |

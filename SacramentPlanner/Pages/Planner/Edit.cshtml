@@ -76,25 +76,25 @@
             </div>
             <div class="form-group">
                 <label asp-for="SacramentPlan.OpeningHymn" class="control-label">Opening Hymn</label>
-                <input asp-for="SacramentPlan.OpeningHymn" class="form-control" />
+                @Html.DropDownList("HymnsListOpening", (IEnumerable<SelectListItem>)ViewBag.HymnsList)
                 <span asp-validation-for="SacramentPlan.OpeningHymn" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="SacramentPlan.SacramentHymn" class="control-label">Sacrament Hymn</label>
-                <input asp-for="SacramentPlan.SacramentHymn" class="form-control" />
+                @Html.DropDownList("HymnsListSacrament", (IEnumerable<SelectListItem>)ViewBag.HymnsList)
                 <span asp-validation-for="SacramentPlan.SacramentHymn" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="SacramentPlan.IntermediateHymn" class="control-label">Intermediate Hymn</label>
-                <input asp-for="SacramentPlan.IntermediateHymn" class="form-control" />
+                @Html.DropDownList("HymnsListIntermediate", (IEnumerable<SelectListItem>)ViewBag.HymnsList)
                 <span asp-validation-for="SacramentPlan.IntermediateHymn" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="SacramentPlan.ClosingHymn" class="control-label">Closing Hymn</label>
-                <input asp-for="SacramentPlan.ClosingHymn" class="form-control" />
+                @Html.DropDownList("HymnsListClosing", (IEnumerable<SelectListItem>)ViewBag.HymnsList)
                 <span asp-validation-for="SacramentPlan.ClosingHymn" class="text-danger"></span>
             </div>
             @foreach (var speaker in Model.SacramentPlan.Speakers)
