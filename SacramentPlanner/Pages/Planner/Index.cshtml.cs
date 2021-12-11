@@ -25,7 +25,12 @@ namespace SacramentPlanner.Pages.Planner
 
         public async Task OnGetAsync()
         {
-            SacramentPlan = await _context.SacramentPlanner.ToListAsync();
+            SacramentPlan = await _context.SacramentPlanner
+                .Include(s => s.OpeningHymn)
+                .Include(s => s.SacramentHymn)
+                .Include(s => s.ClosingHymn)
+                .Include(s => s.IntermediateHymn)
+                .AsNoTracking().ToListAsync();
             
         }
     }

@@ -15,6 +15,7 @@ namespace SacramentPlanner.Pages.Planner
     public class CreateModel : PageModel
     {
         private readonly SacramentPlanner.Data.SacramentPlannerContext _context;
+        //public IQueryable<Hymn> HymnList { get; set; }
 
         public CreateModel(SacramentPlanner.Data.SacramentPlannerContext context)
         {
@@ -22,7 +23,7 @@ namespace SacramentPlanner.Pages.Planner
             Speakers = new List<Speaker>();
         }
 
-        public IActionResult OnGet()
+        public async void PopulateHymns()
         {
             String line;
             String data = "{";
@@ -30,39 +31,21 @@ namespace SacramentPlanner.Pages.Planner
             List<SelectListItem> Hymns = new List<SelectListItem>();
             try
             {
-                //Pass the file path and file name to the StreamReader constructor
                 StreamReader sr = new StreamReader("./JSON/Hymns.json");
-                //Read the first line of text
                 line = sr.ReadLine();
-                //Continue to read until you reach end of file
                 while (line != null)
                 {
-                    //write the line to console window
-                    
-                    //Read the next line
                     line = sr.ReadLine();
                     data += line;
                 }
-                //close the file
+               
                 sr.Close();
-
                 var details = JObject.Parse(data);
 
-
-
-                for (int i = 0; i < 341; i++)
+                for (int i = 1; i <= 341; i++)
                 {
-                    
-                    try
-                    {
-                        //Hymn Hymn = new Hymn((string)details[i.ToString()]["name"]);
-                        //Hymn.HymnId = i;
-                        //HymnList.Add(Hymn);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine("Exception: " + e.Message);
-                    }
+                   Hymn hymn = new Hymn((string)details[i.ToString()]["name"]);
+                   _context.Hymn.Add(hymn);
                 }
             }
             catch (Exception e)
@@ -72,8 +55,23 @@ namespace SacramentPlanner.Pages.Planner
             finally
             {
                 Console.WriteLine("Executing finally block.");
+                await _context.SaveChangesAsync();
             }
-            SelectList HymnSelectList = new SelectList(HymnList, "HymnId", "Name");
+            
+        }
+        public IActionResult OnGet()
+        {
+
+            if (!_context.Hymn.Any())
+            {
+                PopulateHymns();
+            }
+
+            var HymnList = _context.Hymn.Select(h => new { HymnId = h.HymnId, HymnValue = $"{h.HymnId} - {h.Name}" }).ToList();
+            var NoHymn = new { HymnId = 0, HymnValue = "No Hymn Selected" };
+            HymnList.Insert(0, NoHymn);
+
+            SelectList HymnSelectList = new SelectList(HymnList, "HymnId", "HymnValue");
             ViewData["HymnsList"] = HymnSelectList;
 
             return Page();
@@ -92,25 +90,26 @@ namespace SacramentPlanner.Pages.Planner
                 return Page();
             }
             // create the speaker and hymn objects from the form inputs based on the names;
-            String openingHymnName = Request.Form["openingHymnName"];
-            String sacramentHymnName = Request.Form["sacramentHymnName"];
-            String intermediateHymnName = Request.Form["intermediateHymnName"];
-            String closingHymnName = Request.Form["closingHymnName"];
-            Hymn openingHymn = new Hymn(openingHymnName);
-            Hymn intermediateHymn;          
-            Hymn sacramentHymn = new Hymn(sacramentHymnName);
-            if (intermediateHymnName != "")
-            {
-                 intermediateHymn = new Hymn(intermediateHymnName);
-                _context.Hymn.Add(intermediateHymn);
+            var openingHymnId = Request.Form["HymnsListOpening"];
+            var sacramentHymnId = Request.Form["HymnsListSacrament"];
+            var intermediateHymnId = Request.Form["HymnsListIntermediate"];
+            var closingHymnId = Request.Form["HymnsListClosing"];
+            
+            
+            var HymnList = from h in _context.Hymn
+                       select h;
 
-            }
-            Hymn closingHymn = new Hymn(closingHymnName);
-            _context.Hymn.Add(openingHymn);
-            _context.Hymn.Add(sacramentHymn);
+            var OpeningHymn = HymnList.FirstOrDefault(x => x.HymnId == Int32.Parse(openingHymnId));
+            var SacramentHymn = HymnList.FirstOrDefault(x => x.HymnId == Int32.Parse(sacramentHymnId));
+            var IntermediateHymn = HymnList.FirstOrDefault(x => x.HymnId == Int32.Parse(intermediateHymnId));
+            var ClosingHymn = HymnList.FirstOrDefault(x => x.HymnId == Int32.Parse(closingHymnId));
 
-            _context.Hymn.Add(closingHymn);
-           
+            SacramentPlan.OpeningHymn = OpeningHymn;
+            SacramentPlan.SacramentHymn = SacramentHymn;
+            SacramentPlan.IntermediateHymn = IntermediateHymn;
+            SacramentPlan.ClosingHymn = ClosingHymn;
+            //SacramentPlan.OpeningHymn = openingHymnName;
+
             SacramentPlan.CreationDate = DateTime.Now;
 
 

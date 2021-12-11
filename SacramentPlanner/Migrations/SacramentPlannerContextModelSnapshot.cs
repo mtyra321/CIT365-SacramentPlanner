@@ -26,6 +26,9 @@ namespace SacramentPlanner.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("HymnNumber")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -97,15 +100,12 @@ namespace SacramentPlanner.Migrations
                     b.Property<int>("SacramentPlannerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SacramentPlannerId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Topic")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SpeakerId");
 
-                    b.HasIndex("SacramentPlannerId1");
+                    b.HasIndex("SacramentPlannerId");
 
                     b.ToTable("Speaker");
                 });
@@ -141,7 +141,9 @@ namespace SacramentPlanner.Migrations
                 {
                     b.HasOne("SacramentPlanner.Models.SacramentPlan", "SacramentPlan")
                         .WithMany()
-                        .HasForeignKey("SacramentPlannerId1");
+                        .HasForeignKey("SacramentPlannerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("SacramentPlan");
                 });

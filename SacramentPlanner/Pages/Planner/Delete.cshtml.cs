@@ -22,6 +22,8 @@ namespace SacramentPlanner.Pages.Planner
         [BindProperty]
         public SacramentPlan SacramentPlan { get; set; }
 
+        public IQueryable<Speaker> Speakers { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -47,14 +49,25 @@ namespace SacramentPlanner.Pages.Planner
              
             SacramentPlan = await _context.SacramentPlanner.FindAsync(id);
 
+
             if (SacramentPlan != null)
             {
-                
+
                 //Speakers = from s in _context.Speaker
                 //           select s;
                 //Speakers = Speakers.Where(x => x.SacramentPlannerId == SacramentPlan.SacramentPlannerId).OrderByDescending(x => x.SpeakerId);
                 //then loop through speakers and remove each one from context.
-               
+
+                Speakers = from s in _context.Speaker
+                           select s;
+                Speakers = Speakers.Where(x => x.SacramentPlannerId == SacramentPlan.SacramentPlannerId).OrderBy(x => x.SpeakerId);
+
+                foreach (var Speaker in Speakers)
+                {
+                    _context.Speaker.Remove(Speaker);
+                }
+                await _context.SaveChangesAsync();
+
                 _context.SacramentPlanner.Remove(SacramentPlan);
                 await _context.SaveChangesAsync();
             }

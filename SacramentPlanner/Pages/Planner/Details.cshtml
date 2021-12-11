@@ -35,6 +35,15 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SacramentPlan.CreationDate)
         </dd>
+        @if (Model.SacramentPlan.OpeningHymn != null)
+        {
+            <dt class="col-sm-2">
+                Opening Hymn:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SacramentPlan.OpeningHymn.HymnId) - @Html.DisplayFor(model => model.SacramentPlan.OpeningHymn.Name)
+            </dd>
+        }
         <dt class="col-sm-2">
             Invocation:
         </dt>
@@ -57,7 +66,34 @@
                 @Html.DisplayFor(modelItem => speaker.Topic)
             </dd>
         }
+        @if (Model.SacramentPlan.SacramentHymn != null)
+        {
+            <dt class="col-sm-2">
+                Sacramental Hymn:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SacramentPlan.SacramentHymn.HymnId) - @Html.DisplayFor(model => model.SacramentPlan.SacramentHymn.Name)
+            </dd>
+        }
+        @if (Model.SacramentPlan.IntermediateHymn != null)
+        {
+            <dt class="col-sm-2">
+                Intermediate Hymn:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SacramentPlan.IntermediateHymn.HymnId) - @Html.DisplayFor(model => model.SacramentPlan.IntermediateHymn.Name)
+            </dd>
 
+        }
+        @if (Model.SacramentPlan.ClosingHymn != null)
+        {
+            <dt class="col-sm-2">
+                Closing Hymn:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SacramentPlan.ClosingHymn.HymnId) - @Html.DisplayFor(model => model.SacramentPlan.ClosingHymn.Name)
+            </dd>
+        }
 
         <dt class="col-sm-2">
             Benediction:

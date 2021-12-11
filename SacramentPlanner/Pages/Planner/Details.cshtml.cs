@@ -29,7 +29,12 @@ namespace SacramentPlanner.Pages.Planner
                 return NotFound();
             }
 
-            SacramentPlan = await _context.SacramentPlanner.FirstOrDefaultAsync(m => m.SacramentPlannerId == id);
+            SacramentPlan = await _context.SacramentPlanner
+                .Include(s => s.OpeningHymn)
+                .Include(s => s.SacramentHymn)
+                .Include(s => s.ClosingHymn)
+                .Include(s => s.IntermediateHymn)
+                .AsNoTracking().FirstOrDefaultAsync(m => m.SacramentPlannerId == id);
 
             if (SacramentPlan == null)
             {
@@ -38,10 +43,6 @@ namespace SacramentPlanner.Pages.Planner
              Speakers = from s in _context.Speaker
                         select s;
             Speakers = Speakers.Where(x => x.SacramentPlannerId == SacramentPlan.SacramentPlannerId).OrderBy(x => x.SpeakerId );
-            
-
-
-
 
 
             return Page();

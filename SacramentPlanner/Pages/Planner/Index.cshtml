@@ -31,6 +31,18 @@
             <th>
                 @Html.DisplayNameFor(model => model.SacramentPlan[0].ClosingPrayer)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SacramentPlan[0].OpeningHymn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SacramentPlan[0].SacramentHymn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SacramentPlan[0].IntermediateHymn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SacramentPlan[0].ClosingHymn)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -54,6 +66,18 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ClosingPrayer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpeningHymn.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SacramentHymn.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IntermediateHymn.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClosingHymn.Name)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.SacramentPlannerId">Edit</a> |
