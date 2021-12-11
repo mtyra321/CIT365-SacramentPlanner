@@ -28,6 +28,6 @@ namespace SacramentPlanner.Models
 
         public String OpeningPrayer { get; set; }
         public String ClosingPrayer { get; set; }
-
+        public virtual ICollection<Speaker> Speakers { get; set; }
     }
 }

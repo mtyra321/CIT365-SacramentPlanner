@@ -22,8 +22,10 @@ namespace SacramentPlanner.Pages.Planner
 
         [BindProperty]
         public SacramentPlan SacramentPlan { get; set; }
-        public IQueryable<Speaker> Speakers { get; set; }
 
+
+        //public IQueryable<Speaker> Speakers { get; set; }
+        
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -32,27 +34,18 @@ namespace SacramentPlanner.Pages.Planner
                 return NotFound();
             }
 
-            SacramentPlan = await _context.SacramentPlanner.FirstOrDefaultAsync(m => m.SacramentPlannerId == id);
+            SacramentPlan = await _context.SacramentPlanner
+                .Include(s => s.Speakers)
+                .FirstOrDefaultAsync(m => m.SacramentPlannerId == id);
 
             if (SacramentPlan == null)
             {
                 return NotFound();
             }
 
-
-            Speakers = from s in _context.Speaker
-                       select s;
-            Speakers = Speakers.Where(x => x.SacramentPlannerId == SacramentPlan.SacramentPlannerId).OrderBy(x => x.SpeakerId);
-
-
-
-         
-
-
-
-
-
-
+            //Speakers = from s in _context.Speaker
+            //           select s;
+            //Speakers = Speakers.Where(x => x.SacramentPlannerId == SacramentPlan.SacramentPlannerId).OrderBy(x => x.SpeakerId);
             return Page();
         }
 
@@ -64,8 +57,15 @@ namespace SacramentPlanner.Pages.Planner
             {
                 return Page();
             }
+         //   _context.Attach(SacramentPlan.Speakers).State = EntityState.Modified;
 
             _context.Attach(SacramentPlan).State = EntityState.Modified;
+            //foreach (Speaker oneSpeaker in SacramentPlan.Speakers)
+            //{
+            //    _context.Attach(oneSpeaker).State = EntityState.Modified;
+
+            //}
+
 
             try
             {
@@ -98,11 +98,9 @@ namespace SacramentPlanner.Pages.Planner
                 speaker.Topic = Request.Form["speakerTopic" + x];
                 speaker.SacramentPlannerId = SacramentPlan.SacramentPlannerId;
                 _context.Speaker.Add(speaker);
+                await _context.SaveChangesAsync();
                 x++;
             }
-
-            await _context.SaveChangesAsync();
-
 
 
             return RedirectToPage("./Index");

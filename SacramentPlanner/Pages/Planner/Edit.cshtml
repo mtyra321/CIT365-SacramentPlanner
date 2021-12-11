@@ -97,49 +97,25 @@
                 <input asp-for="SacramentPlan.ClosingHymn" class="form-control" />
                 <span asp-validation-for="SacramentPlan.ClosingHymn" class="text-danger"></span>
             </div>
-            @foreach (var speaker in Model.Speakers)
+            @foreach (var speaker in Model.SacramentPlan.Speakers)
             {
-
                 <div class="form-group">
-                    <label asp-for="@speaker" class="control-label">Speaker: </label>
-                    <input asp-for="@speaker" class="form-control" />
-                </div>
-                //value="@Html.DisplayFor(modelItem => speaker.Name)"
-                <div class="form-group">
-                    <label class="control-label">Topic: </label>
-                    <input class="form-control" value="@Html.DisplayFor(modelItem => speaker.Topic)" />
-                </div>
-                //i++;
+                    <input asp-for="@speaker.SpeakerId" type="hidden" />
 
+
+                    <label asp-for="@speaker.Name" class="control-label">Speaker: </label>
+                    <input asp-for="@speaker.Name" class="form-control" />
+                    <span asp-validation-for="@speaker.Name" class="text-danger"></span>
+
+                    <label asp-for="@speaker.Topic" class="control-label">Topic: </label>
+                    <input asp-for="@speaker.Topic" class="form-control" />
+                    <span asp-validation-for="@speaker.Topic" class="text-danger"></span>
+                </div>
             }
-
             <button type="button" id="addSpeakerBtn" onclick="addSpeaker()">Add Speaker</button>
             <div class="form-group" id="speakerDiv">
 
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             <div class="form-group">
                 <label asp-for="SacramentPlan.ClosingPrayer" class="control-label">Benediction</label>
